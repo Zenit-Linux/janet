@@ -1,1 +1,26 @@
+package {
+  name        = "janet"
+  version     = "1.41.1"
+  arch        = ["x86_64"]
+  description = "Interpreter i bytecode VM jezyka Janet + jpm (Janet Project Manager) -- budowane ze zrodel"
+  depends_on  = ["gcc", "make"]
+}
 
+recipe {
+  file = "recipe.janet"
+  lang = "janet"
+}
+
+# Janet nie cross-kompiluje siebie samo -- `make` na oficjalnym
+# Makefile respektuje CC/CXX/AR z tego bloku (zobacz recipe.janet),
+# ale sensowne jest to tylko jesli faktycznie masz sprawny toolchain
+# krzyzowy (albo budujesz pod QEMU) dla danej architektury.
+# toolchains {
+#   aarch64 = "aarch64-linux-gnu-"
+# }
+
+release {
+  repo       = "https://github.com/Zenit-Linux/own-repository"
+  repo_file  = "repo/own-repository.json"
+  asset_name = "janet"
+}
